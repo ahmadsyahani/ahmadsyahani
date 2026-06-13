@@ -26,7 +26,7 @@
 ```json
 {
   "name": "Ahmad Syahani",
-  "alias": "ahmadsyahani",
+  "alias": "dritszz",
   "location": "Surabaya, East Java 🌏",
   "education": "Electronic Engineering Polytechnic Institute of Surabaya (PENS)",
   "status": "😋 Busy (but always down to collab)",
@@ -35,7 +35,7 @@
     "Full-Stack Web Development",
     "Mobile Development (Flutter/Dart)",
     "UI/UX & Design Systems",
-    "Open Source"
+    "Machine Learning"
   ],
   "currently_building": "Something cool 👀"
 }
