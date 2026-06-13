@@ -1,52 +1,164 @@
-<h1 align="center">Hey 👋What's Up?</h1>
-
-###
-
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=ts" height="60" alt="typescript logo"  />
-  <img width="12" />
-  <img src="https://skillicons.dev/icons?i=nextjs" height="60" alt="nextjs logo"  />
-  <img width="12" />
-  <img src="https://skillicons.dev/icons?i=tailwind" height="60" alt="tailwindcss logo"  />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/storybook/storybook-original.svg" height="60" alt="storybook logo"  />
-  <img width="12" />
-  <img src="https://skillicons.dev/icons?i=graphql" height="60" alt="graphql logo"  />
-  <img width="12" />
-  <img src="https://skillicons.dev/icons?i=go" height="60" alt="go logo"  />
-  <img width="12" />
-  <img src="https://skillicons.dev/icons?i=rust" height="60" alt="rust logo"  />
-  <img width="12" />
-  <img src="https://skillicons.dev/icons?i=nestjs" height="60" alt="nestjs logo"  />
-  <img width="12" />
-  <img src="https://skillicons.dev/icons?i=py" height="60" alt="python logo"  />
-  <img width="12" />
-  <img src="https://skillicons.dev/icons?i=aws" height="60" alt="amazonwebservices logo"  />
+
+```
+ ░█████╗░██╗░░██╗███╗░░░███╗░█████╗░██████╗░
+ ██╔══██╗██║░░██║████╗░████║██╔══██╗██╔══██╗
+ ███████║███████║██╔████╔██║███████║██║░░██║
+ ██╔══██║██╔══██║██║╚██╔╝██║██╔══██║██║░░██║
+ ██║░░██║██║░░██║██║░╚═╝░██║██║░░██║██████╔╝
+ ╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░░░╚═╝╚═╝░░╚═╝╚═════╝░
+```
+
+### `$ whoami`
+
+**Ahmad Syahani** — Builder. Tinkerer. PENS Surabaya Kid. 🌴
+
+*Turning coffee & late nights into code that actually ships.*
+
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=18&pause=1000&color=6EE7B7&center=true&vCenter=true&width=500&lines=Full+Stack+Developer;Flutter+%2B+Mobile+Enthusiast;Open+Source+Contributor;Always+learning%2C+always+building)](https://git.io/typing-svg)
+
 </div>
 
-###
+---
+
+## `> about_me.json`
+
+```json
+{
+  "name": "Ahmad Syahani",
+  "alias": "ahmadsyahani",
+  "location": "Surabaya, East Java 🌏",
+  "education": "Electronic Engineering Polytechnic Institute of Surabaya (PENS)",
+  "status": "😋 Busy (but always down to collab)",
+  "organization": "Bytes Creative Teams",
+  "interests": [
+    "Full-Stack Web Development",
+    "Mobile Development (Flutter/Dart)",
+    "UI/UX & Design Systems",
+    "Open Source"
+  ],
+  "currently_building": "Something cool 👀"
+}
+```
+
+---
+
+## `> tech_stack --list`
+
+**Frontend**
+
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
+![Astro](https://img.shields.io/badge/Astro-FF5D01?style=flat-square&logo=astro&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
+
+**Backend**
+
+![PHP](https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white)
+![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=flat-square&logo=laravel&logoColor=white)
+![Go](https://img.shields.io/badge/Go-00ADD8?style=flat-square&logo=go&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![C](https://img.shields.io/badge/C-A8B9CC?style=flat-square&logo=c&logoColor=black)
+![C++](https://img.shields.io/badge/C++-00599C?style=flat-square&logo=c%2B%2B&logoColor=white)
+
+**Mobile**
+
+![Flutter](https://img.shields.io/badge/Flutter-02569B?style=flat-square&logo=flutter&logoColor=white)
+![Dart](https://img.shields.io/badge/Dart-0175C2?style=flat-square&logo=dart&logoColor=white)
+![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=kotlin&logoColor=white)
+
+**Database & Tools**
+
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
+![Figma](https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=figma&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
+
+---
+
+## `> top_languages --sort=usage`
 
 <div align="center">
-  <img src="https://img.shields.io/static/v1?message=LinkedIn&logo=linkedin&label=&color=0077B5&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="linkedin logo"  />
-  <img src="https://img.shields.io/static/v1?message=Twitter&logo=twitter&label=&color=1DA1F2&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="twitter logo"  />
-  <img src="https://img.shields.io/static/v1?message=Discord&logo=discord&label=&color=7289DA&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="discord logo"  />
-  <img src="https://img.shields.io/static/v1?message=Twitch&logo=twitch&label=&color=9146FF&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="twitch logo"  />
-  <img src="https://img.shields.io/static/v1?message=dev.to&logo=dev.to&label=&color=0A0A0A&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="devto logo"  />
+
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=ahmadsyahani&layout=donut&theme=tokyonight&hide_border=true&langs_count=8)](https://github.com/ahmadsyahani)
+
 </div>
 
-###
+---
+
+## `> git log --stats`
 
 <div align="center">
-  <img src="https://streak-stats.demolab.com?user=maurodesouza&locale=en&mode=daily&theme=dracula&hide_border=false&border_radius=5&order=3" height="150" alt="streak graph"  />
-  <img src="https://raw.githubusercontent.com/maurodesouza/maurodesouza/trophy-output/trophy.svg" height="150" alt="trophy graph"  />
+
+[![Ahmad's GitHub Stats](https://github-readme-stats.vercel.app/api?username=ahmadsyahani&show_icons=true&theme=tokyonight&hide_border=true&include_all_commits=true&count_private=true)](https://github.com/ahmadsyahani)
+
+[![GitHub Streak](https://streak-stats.demolab.com?user=ahmadsyahani&theme=tokyonight&hide_border=true)](https://git.io/streak-stats)
+
 </div>
 
-###
+---
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/maurodesouza/maurodesouza/pacman-output/pacman-contribution-graph-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/maurodesouza/maurodesouza/pacman-output/pacman-contribution-graph.svg">
-  <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/maurodesouza/maurodesouza/pacman-output/pacman-contribution-graph.svg">
-</picture>
+## `> ls ./featured_projects`
 
-###
+| Project | Stack | Description |
+|---|---|---|
+| 🌟 **[Nexa](https://github.com/ahmadsyahani/Nexa)** | Dart / Flutter | Mobile app with clean architecture |
+| 🎂 **[enjie-birthday](https://github.com/ahmadsyahani/enjie-birthday)** | Astro | A birthday surprise, built with love & code |
+| 🖥️ **[mis-center-bytes](https://github.com/ahmadsyahani/mis-center-bytes)** | Laravel / Blade | Management Information System for Bytes |
+| 📝 **[pensmate-app](https://github.com/ahmadsyahani/pensmate-app)** | JavaScript | Productivity app for PENS students |
+| 💬 **[sambat](https://github.com/ahmadsyahani/sambat)** | PHP | A place to vent — anonymous feedback platform |
+
+---
+
+## `> cat contribution_graph.txt`
+
+<div align="center">
+
+[![Ahmad's Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=ahmadsyahani&theme=tokyo-night&hide_border=true&area=true)](https://github.com/ahmadsyahani)
+
+</div>
+
+---
+
+## `> ./achievements --unlocked`
+
+<div align="center">
+
+🦈 **Pull Shark** &nbsp;|&nbsp; ⚡ **YOLO** &nbsp;|&nbsp; 🎯 **Quickdraw**
+
+*55 repos and counting...*
+
+</div>
+
+---
+
+## `> contact --reach-out`
+
+<div align="center">
+
+[![GitHub](https://img.shields.io/badge/GitHub-ahmadsyahani-181717?style=for-the-badge&logo=github)](https://github.com/ahmadsyahani)
+
+*Open to collaborations, freelance projects, or just vibe-check conversations about tech* 🤙
+
+</div>
+
+---
+
+<div align="center">
+
+```
+  ┌──────────────────────────────────────────┐
+  │   "First, solve the problem.             │
+  │    Then, write the code." — John Johnson │
+  └──────────────────────────────────────────┘
+```
+
+*Profile views powered by curiosity and too much caffeine ☕*
+
+![Profile Views](https://komarev.com/ghpvc/?username=ahmadsyahani&color=6EE7B7&style=flat-square&label=visitors)
+
+</div>
