@@ -11,7 +11,7 @@
 
 ### `$ whoami`
 
-**Ahmad Syahani** — Builder. Tinkerer. PENS Surabaya Kid. 🌴
+**Ahmad Syahani** — Tech Enthusiast. Based on Surabaya.
 
 *Turning coffee & late nights into code that actually ships.*
 
