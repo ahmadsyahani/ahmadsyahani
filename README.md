@@ -1,164 +1,115 @@
 <div align="center">
 
-```
- ░█████╗░██╗░░██╗███╗░░░███╗░█████╗░██████╗░
- ██╔══██╗██║░░██║████╗░████║██╔══██╗██╔══██╗
- ███████║███████║██╔████╔██║███████║██║░░██║
- ██╔══██║██╔══██║██║╚██╔╝██║██╔══██║██║░░██║
- ██║░░██║██║░░██║██║░╚═╝░██║██║░░██║██████╔╝
- ╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░░░╚═╝╚═╝░░╚═╝╚═════╝░
-```
-
-### `$ whoami`
-
-**Ahmad Syahani** — Tech Enthusiast. Based on Surabaya.
-
-*Turning coffee & late nights into code that actually ships.*
-
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=18&pause=1000&color=6EE7B7&center=true&vCenter=true&width=500&lines=Full+Stack+Developer;Flutter+%2B+Mobile+Enthusiast;Open+Source+Contributor;Always+learning%2C+always+building)](https://git.io/typing-svg)
-
+<table width="100%">
+<tr>
+<td width="64%" valign="middle">
+<p><sub>RECRUITER SIGNAL BRIEF · ahmadsyahani</sub></p>
+<h1>Ahmad Syahani</h1>
+<h2>Frontend or full-stack engineer</h2>
+<p>Building useful software and sharing the work in public.</p>
+<p><strong>● Building and sharing work in public</strong></p>
+<p><sub>Based in Surabaya, East Java · Building at Electronics Engineering Polytechnic Institute of Surabaya</sub></p>
+<p><a href="https://github.com/ahmadsyahani">GitHub</a> &nbsp;·&nbsp; <a href="https://ahmadsyahani.app">Website</a></p>
+</td>
+<td width="36%" valign="middle" align="center">
+<img src="https://avatars.githubusercontent.com/u/111715353?u=b64b7ef3258652befcab704d5f0414dbfb3b1357&amp;v=4" width="180" alt="Ahmad Syahani GitHub avatar" />
+</td>
+</tr>
+</table>
 </div>
 
----
+<h2>What teams can evaluate quickly</h2>
 
-## `> about_me.json`
+<table width="100%">
+<tr>
+<td width="33%" valign="top"><h3>Role fit</h3><p>Frontend or full-stack engineer · HTML · CSS · PHP</p></td>
+<td width="33%" valign="top"><h3>Public proof</h3><p>61 repositories · 1 stars</p></td>
+<td width="33%" valign="top"><h3>Momentum</h3><p>157 contributions · 55 active days</p></td>
+</tr>
+</table>
 
-```json
-{
-  "name": "Ahmad Syahani",
-  "alias": "dritszz",
-  "location": "Surabaya, East Java 🌏",
-  "education": "Electronic Engineering Polytechnic Institute of Surabaya (PENS)",
-  "status": "😋 Busy (but always down to collab)",
-  "organization": "Bytes Creative Teams",
-  "interests": [
-    "Full-Stack Web Development",
-    "Mobile Development (Flutter/Dart)",
-    "UI/UX & Design Systems",
-    "Machine Learning"
-  ],
-  "currently_building": "Something cool 👀"
-}
-```
+<p><sub>Building useful software and sharing the work in public.</sub></p>
 
----
+<h2>Proof at a glance</h2>
 
-## `> tech_stack --list`
+<table width="100%">
+<tr>
+<td width="25%" align="center"><strong>61</strong><br /><sub>Repositories</sub></td>
+<td width="25%" align="center"><strong>1</strong><br /><sub>Stars</sub></td>
+<td width="25%" align="center"><strong>157</strong><br /><sub>Contributions</sub></td>
+<td width="25%" align="center"><strong>9</strong><br /><sub>Followers</sub></td>
+</tr>
+</table>
 
-**Frontend**
+<p align="center">
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="https://www.gitskins.com/api/section/stats?username=ahmadsyahani&theme=github-dark&avatar=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F111715353%3Fu%3Db64b7ef3258652befcab704d5f0414dbfb3b1357%26v%3D4&v=recruiter-stats-1&mode=light" />
+  <img src="https://www.gitskins.com/api/section/stats?username=ahmadsyahani&theme=github-dark&avatar=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F111715353%3Fu%3Db64b7ef3258652befcab704d5f0414dbfb3b1357%26v%3D4&v=recruiter-stats-1&mode=dark" width="100%" alt="Ahmad Syahani GitHub proof metrics" />
+</picture>
+</p>
 
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js&logoColor=white)
-![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
-![Astro](https://img.shields.io/badge/Astro-FF5D01?style=flat-square&logo=astro&logoColor=white)
-![Vue.js](https://img.shields.io/badge/Vue.js-4FC08D?style=flat-square&logo=vuedotjs&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
-![HTML](https://img.shields.io/badge/HTML-E34F26?style=flat-square&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS-1572B6?style=flat-square&logo=css&logoColor=white)
+<h2>Selected work</h2>
 
-**Backend**
+<table width="100%">
+<tr>
+<td width="58%" valign="top">
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="https://www.gitskins.com/api/section/projects?username=ahmadsyahani&theme=github-dark&avatar=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F111715353%3Fu%3Db64b7ef3258652befcab704d5f0414dbfb3b1357%26v%3D4&repos=ahmadsyahani%2FNexa%2Cahmadsyahani%2Fmis-center-bytes%2Cahmadsyahani%2Fpensmate-app%2Cahmadsyahani%2Fenjie-birthday&v=recruiter-projects-1&mode=light" />
+  <img src="https://www.gitskins.com/api/section/projects?username=ahmadsyahani&theme=github-dark&avatar=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F111715353%3Fu%3Db64b7ef3258652befcab704d5f0414dbfb3b1357%26v%3D4&repos=ahmadsyahani%2FNexa%2Cahmadsyahani%2Fmis-center-bytes%2Cahmadsyahani%2Fpensmate-app%2Cahmadsyahani%2Fenjie-birthday&v=recruiter-projects-1&mode=dark" width="100%" alt="Ahmad Syahani selected projects" />
+</picture>
+</td>
+<td width="42%" valign="top">
+<h3><a href="https://github.com/ahmadsyahani/Nexa">Nexa</a></h3>
+<p>A selected public project.</p>
+<p><sub>Dart · ⭐ 0 · 🍴 0</sub></p>
+<p><a href="https://github.com/ahmadsyahani/Nexa">Read the repository →</a></p>
+</td>
+</tr>
+</table>
 
-![PHP](https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white)
-![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=flat-square&logo=laravel&logoColor=white)
-![Go](https://img.shields.io/badge/Go-00ADD8?style=flat-square&logo=go&logoColor=white)
+<table width="100%">
+<tr>
+<td width="33%" valign="top"><h3><a href="https://github.com/ahmadsyahani/mis-center-bytes">mis-center-bytes</a></h3><p>A selected public project.</p><p><sub>Blade · ⭐ 0</sub></p></td>
+<td width="33%" valign="top"><h3><a href="https://github.com/ahmadsyahani/pensmate-app">pensmate-app</a></h3><p>A selected public project.</p><p><sub>JavaScript · ⭐ 0</sub></p></td>
+<td width="33%" valign="top"><h3><a href="https://github.com/ahmadsyahani/enjie-birthday">enjie-birthday</a></h3><p>A selected public project.</p><p><sub>Astro · ⭐ 0</sub></p></td>
+</tr>
+</table>
 
-**Mobile**
+<h2>Technical toolkit</h2>
 
-![Flutter](https://img.shields.io/badge/Flutter-02569B?style=flat-square&logo=flutter&logoColor=white)
-![Dart](https://img.shields.io/badge/Dart-0175C2?style=flat-square&logo=dart&logoColor=white)
-![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=kotlin&logoColor=white)
+<p align="center">
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="https://www.gitskins.com/api/section/stack?username=ahmadsyahani&theme=github-dark&avatar=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F111715353%3Fu%3Db64b7ef3258652befcab704d5f0414dbfb3b1357%26v%3D4&v=recruiter-stack-1&mode=light" />
+  <img src="https://www.gitskins.com/api/section/stack?username=ahmadsyahani&theme=github-dark&avatar=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F111715353%3Fu%3Db64b7ef3258652befcab704d5f0414dbfb3b1357%26v%3D4&v=recruiter-stack-1&mode=dark" width="100%" alt="Ahmad Syahani technology stack" />
+</picture>
+</p>
 
-**Database & Tools**
+<table width="100%">
+<tr>
+<td width="20%" align="center"><strong>HTML</strong><br /><sub>50% of public code</sub></td>
+<td width="20%" align="center"><strong>CSS</strong><br /><sub>15% of public code</sub></td>
+<td width="20%" align="center"><strong>PHP</strong><br /><sub>10% of public code</sub></td>
+<td width="20%" align="center"><strong>Dart</strong><br /><sub>9% of public code</sub></td>
+<td width="20%" align="center"><strong>JavaScript</strong><br /><sub>6% of public code</sub></td>
+</tr>
+</table>
 
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/postgreSQL-4479A1?style=flat-square&logo=postgresql&logoColor=white)
-![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
-![Figma](https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=figma&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
+<h2>Consistency signal</h2>
 
+<p align="center">
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="https://www.gitskins.com/api/section/heatmap?username=ahmadsyahani&theme=github-dark&avatar=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F111715353%3Fu%3Db64b7ef3258652befcab704d5f0414dbfb3b1357%26v%3D4&v=recruiter-heatmap-1&mode=light" />
+  <img src="https://www.gitskins.com/api/section/heatmap?username=ahmadsyahani&theme=github-dark&avatar=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F111715353%3Fu%3Db64b7ef3258652befcab704d5f0414dbfb3b1357%26v%3D4&v=recruiter-heatmap-1&mode=dark" width="100%" alt="Ahmad Syahani contribution activity" />
+</picture>
+</p>
 
----
+<hr />
 
-## `> top_languages --sort=usage`
+<table width="100%">
+<tr>
+<td width="62%" valign="middle"><h2>Let’s talk about the next build</h2><p>Open to thoughtful teams, ambitious products, and useful engineering work.</p></td>
+<td width="38%" valign="middle" align="right"><a href="https://github.com/ahmadsyahani">GitHub</a><br /><a href="https://ahmadsyahani.app">Website</a></td>
+</tr>
+</table>
 
-<div align="center">
-
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=ahmadsyahani&layout=donut&theme=tokyonight&hide_border=true&langs_count=8)](https://github.com/ahmadsyahani)
-
-</div>
-
----
-
-## `> git log --stats`
-
-<div align="center">
-
-[![Ahmad's GitHub Stats](https://github-readme-stats.vercel.app/api?username=ahmadsyahani&show_icons=true&theme=tokyonight&hide_border=true&include_all_commits=true&count_private=true)](https://github.com/ahmadsyahani)
-
-[![GitHub Streak](https://streak-stats.demolab.com?user=ahmadsyahani&theme=tokyonight&hide_border=true)](https://git.io/streak-stats)
-
-</div>
-
----
-
-## `> ls ./featured_projects`
-
-| Project | Stack | Description |
-|---|---|---|
-| 🌟 **[Nexa](https://github.com/ahmadsyahani/Nexa)** | Dart / Flutter | Mobile app with clean architecture |
-| 🎂 **[enjie-birthday](https://github.com/ahmadsyahani/enjie-birthday)** | Astro | A birthday surprise, built with love & code |
-| 🖥️ **[mis-center-bytes](https://github.com/ahmadsyahani/mis-center-bytes)** | Laravel / Blade | Management Information System for Bytes |
-| 📝 **[pensmate-app](https://github.com/ahmadsyahani/pensmate-app)** | JavaScript | Productivity app for PENS students |
-| 💬 **[sambat](https://github.com/ahmadsyahani/sambat)** | PHP | A place to vent — anonymous feedback platform |
-
----
-
-## `> cat contribution_graph.txt`
-
-<div align="center">
-
-[![Ahmad's Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=ahmadsyahani&theme=tokyo-night&hide_border=true&area=true)](https://github.com/ahmadsyahani)
-
-</div>
-
----
-
-## `> ./achievements --unlocked`
-
-<div align="center">
-
-🦈 **Pull Shark** &nbsp;|&nbsp; ⚡ **YOLO** &nbsp;|&nbsp; 🎯 **Quickdraw**
-
-*55 repos and counting...*
-
-</div>
-
----
-
-## `> contact --reach-out`
-
-<div align="center">
-
-[![GitHub](https://img.shields.io/badge/GitHub-ahmadsyahani-181717?style=for-the-badge&logo=github)](https://github.com/ahmadsyahani)
-
-*Open to collaborations, freelance projects, or just vibe-check conversations about tech* 🤙
-
-</div>
-
----
-
-<div align="center">
-
-```
-  ┌──────────────────────────────────────────┐
-  │   "First, solve the problem.             │
-  │    Then, write the code." — John Johnson │
-  └──────────────────────────────────────────┘
-```
-
-*Profile views powered by curiosity and too much caffeine ☕*
-
-![Profile Views](https://komarev.com/ghpvc/?username=ahmadsyahani&color=6EE7B7&style=flat-square&label=visitors)
-
-</div>
+<p align="center"><sub>Ahmad Syahani · recruiter-ready profile generated with <a href="https://www.gitskins.com/readme-generator">GitSkins</a></sub></p>
