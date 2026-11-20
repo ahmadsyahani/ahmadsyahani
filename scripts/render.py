@@ -1,5 +1,6 @@
 import datetime as dt
 import html
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -44,13 +45,13 @@ MUTED = '#58665b'
 FONT = ROOT / 'fonts' / 'GoogleSansFlex.ttf'
 MOTION_CSS = '''
 @keyframes scan{from{opacity:.12;clip-path:inset(0 100% 0 0)}to{opacity:1;clip-path:inset(0)}}
-@keyframes cell{from{opacity:.12;transform:scale(.3)}to{opacity:1;transform:scale(1)}}
-@keyframes bar{from{opacity:.25;transform:scaleY(.025)}to{opacity:1;transform:scaleY(1)}}
+@keyframes cell{0%{opacity:.12;transform:scale(.3)}9%,100%{opacity:1;transform:scale(1)}}
+@keyframes bar{0%{opacity:.25;transform:scaleY(.025)}18%,100%{opacity:1;transform:scaleY(1)}}
 @keyframes arrive{from{opacity:.35;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @keyframes ink{from{opacity:.3}to{opacity:1}}
 .ascii-row{animation:scan .28s ease-out both;transform-box:fill-box}
-.cell{transform-box:fill-box;transform-origin:center;animation:cell .45s cubic-bezier(.16,1,.3,1) both}
-.bar{transform-box:fill-box;transform-origin:center bottom;animation:bar .85s cubic-bezier(.16,1,.3,1) both}
+.cell{transform-box:fill-box;transform-origin:center;animation:cell 7s cubic-bezier(.16,1,.3,1) infinite both}
+.bar{transform-box:fill-box;transform-origin:center bottom;animation:bar 7s cubic-bezier(.16,1,.3,1) infinite both}
 .card-in{animation:arrive .7s cubic-bezier(.16,1,.3,1) both}
 .ink{animation:ink .65s ease-out both}
 @media(prefers-reduced-motion:reduce){.ascii-row,.cell,.bar,.card-in,.ink{animation:none!important;opacity:1!important;transform:none!important;clip-path:none!important}}
@@ -99,6 +100,10 @@ def card(name, height, body, width=880, background=PAPER, left=0, right=0, delay
            f'<style>{MOTION_CSS}</style>{content}</svg>')
     ET.fromstring(svg)
     (CARDS / f'{name}.svg').write_text(svg, encoding='utf-8')
+    static = CARDS / 'static'
+    static.mkdir(exist_ok=True)
+    static_css = '.ascii-row,.cell,.bar,.card-in,.ink{animation:none!important;opacity:1!important;transform:none!important;clip-path:none!important}'
+    (static / f'{name}.svg').write_text(svg.replace(MOTION_CSS, static_css), encoding='utf-8')
 
 
 # Crop the monitor out while keeping the ears, eyes, and chest of the avatar cat.
@@ -228,13 +233,15 @@ for width, suffix in [(880, ''), (440, '-mobile')]:
 
 
 def picture(name, alt, link=None, width='100%', newline=True):
-    value = f'<picture><source media="(max-width: 600px)" srcset="./cards/{name}-mobile.svg" /><img src="./cards/{name}.svg" width="{width}" alt="{html.escape(alt, quote=True)}" /></picture>'
+    desktop_version = hashlib.sha256((CARDS / f'{name}.svg').read_bytes()).hexdigest()[:10]
+    mobile_version = hashlib.sha256((CARDS / f'{name}-mobile.svg').read_bytes()).hexdigest()[:10]
+    value = f'<picture><source media="(max-width: 600px)" srcset="./cards/{name}-mobile.svg?v={mobile_version}" /><img src="./cards/{name}.svg?v={desktop_version}" width="{width}" alt="{html.escape(alt, quote=True)}" /></picture>'
     if link:
         value = f'<a href="{link}">{value}</a>'
     return value+('<br>\n' if newline else '')
 
 
-readme = '<div align="center">\n'
+readme = '<p align="right"><a href="./STATIC.md">Pause animations / Static view</a></p>\n\n<div align="center">\n'
 readme += picture('hero', 'Ahmad Syahani. Frontend and full-stack development in Surabaya. ASCII cat from my GitHub avatar.', 'https://ahmadsyahani.app')
 readme += picture('heatmap', f'Little by little. {total} GitHub contributions and {active} active days.', f'https://github.com/{USER}?tab=overview')
 readme += picture('activity', f'Monthly contributions. {active} active days. Busiest day: {best} contributions.')
@@ -247,7 +254,9 @@ for name in selected:
 readme += '\n'
 readme += '\n</div>\n\n<p align="center"><a href="https://ahmadsyahani.app">Website</a> &nbsp;/&nbsp; <a href="https://github.com/ahmadsyahani">GitHub</a></p>\n'
 (ROOT / 'README.md').write_text(readme, encoding='utf-8')
+static_readme = readme.replace('./STATIC.md', './README.md').replace('Pause animations / Static view', 'Resume animations').replace('./cards/', './cards/static/')
+(ROOT / 'STATIC.md').write_text(static_readme, encoding='utf-8')
 assert len(lines) == 53 and all(len(line) == 100 for line in lines)
 for path in re.findall(r'src="\./([^"]+)"', readme):
-    assert (ROOT / path).is_file(), path
+    assert (ROOT / path.split('?')[0]).is_file(), path
 print(f'Rendered {len(list(CARDS.glob("*.svg")))} SVG cards; {len(days)} days; {total} contributions')
