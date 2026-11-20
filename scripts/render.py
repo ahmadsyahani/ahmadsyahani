@@ -187,12 +187,24 @@ for width, suffix in [(880, ''), (440, '-mobile')]:
     step = (width-pad*2)/54
     cell = step*.76
     top = 117
+    month_labels = []
     for i, (date, count, level) in enumerate(days):
         col, row = divmod(i+lead, 7)
         graph += f'<rect class="cell" style="animation-delay:{.25+col*.027+row*.024:.3f}s" x="{pad+col*step:.2f}" y="{top+row*step:.2f}" width="{cell:.2f}" height="{cell:.2f}" rx="{cell*.2:.2f}" fill="{colors[level]}"><title>{date}: {count} contributions</title></rect>'
+        if date.endswith('-01'):
+            month_labels.append((col, dt.date.fromisoformat(date).strftime('%b')))
     baseline = top+7*step+28
-    graph += text(pad, baseline, f'{days[0][0]} to {days[-1][0]}', 12, MUTED)
-    card('heatmap'+suffix, int(baseline+58), graph, width)
+    legend_x = width-pad-142
+    for col,label in month_labels:
+        x = pad+col*step
+        if mobile or x+24 < legend_x-16:
+            graph += text(x, baseline, label, 10 if mobile else 12, MUTED)
+    legend_y = baseline+31 if mobile else baseline
+    graph += text(legend_x, legend_y, 'Less', 11, MUTED)
+    for i,color in enumerate(colors):
+        graph += f'<rect class="legend-swatch" x="{legend_x+32+i*15}" y="{legend_y-11}" width="12" height="12" rx="2" fill="{color}"/>'
+    graph += text(legend_x+112, legend_y, 'More', 11, MUTED)
+    card('heatmap'+suffix, int(legend_y+58), graph, width)
 
     activity = text(pad, 51, 'The daily rhythm.', 22, weight=600)
     activity += text(pad, 100, f"{stats['total']:,} contributions", 32 if mobile else 40, weight=600)
