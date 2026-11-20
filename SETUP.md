@@ -15,7 +15,7 @@ python scripts/render.py --refresh
 
 Use `python scripts/render.py` to regenerate from the saved data without network access. Edit the hero text and `selected` list in scripts/render.py to change the introduction and featured repositories.
 
-Catfolio uses warm white, moss green, and the cat avatar from the public GitHub profile. Card padding is 56 px on desktop and 32 px on mobile, with 28 px transparent separation between rows. Narrow screens use dedicated mobile SVGs through picture/source.
+Catfolio uses warm white, moss green, and the cat avatar from the public GitHub profile. Its compact composition follows the original reference: hero, contribution calendar, monthly activity, three specialty tiles, and three repository cards. Full-width sections use 44 px padding on desktop and 28 px on mobile. SVG canvases include 20 px row separation and desktop column gutters of 15 px. Narrow screens use dedicated mobile SVGs through picture/source, including a compact side-by-side name and cat portrait.
 
 Headings and body text use the official Google Sans Flex font, converted into vector outlines with FontTools. This preserves the typeface without remote fonts or an installed font on the visitor's computer. The ASCII portrait retains a monospace font so character columns stay aligned. The hero fade runs once and respects reduced motion.
 

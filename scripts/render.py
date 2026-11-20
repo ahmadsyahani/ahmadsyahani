@@ -73,12 +73,12 @@ def text(x, y, value, size=16, color=INK, family=None, extra='', weight=400):
     return f'<g aria-label="{html.escape(str(value), quote=True)}" fill="{color}" transform="translate({x} {y}) scale({scale} {-scale})">{"".join(parts)}</g>'
 
 
-def card(name, height, body, width=880, background=PAPER):
+def card(name, height, body, width=880, background=PAPER, left=0, right=0):
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img">'
            f'<title>{html.escape(name.replace("-", " "))} | Ahmad Syahani</title>'
-           '<style>@keyframes enter{from{opacity:0}to{opacity:1}}.enter{animation:enter 1.2s ease-out both}'
+           '<style>@keyframes enter{from{opacity:.7}to{opacity:1}}.enter{animation:enter 1.2s ease-out both}'
            '@media(prefers-reduced-motion:reduce){.enter{animation:none!important}}</style>'
-           f'<rect width="{width}" height="{height-28}" rx="16" fill="{background}"/>{body}</svg>')
+           f'<g transform="translate({left} 0)"><rect width="{width-left-right}" height="{height-20}" rx="14" fill="{background}"/>{body}</g></svg>')
     ET.fromstring(svg)
     (CARDS / f'{name}.svg').write_text(svg, encoding='utf-8')
 
@@ -127,68 +127,106 @@ selected = ['ShipX-Delivery', 'Nexa', 'ahmadsyahani.app']
 colors = ['#dce2d6', '#bdcfb4', '#8eac87', '#64815e', '#3f614b']
 for width, suffix in [(880, ''), (440, '-mobile')]:
     mobile = bool(suffix)
-    pad = 32 if mobile else 56
-    hero = text(pad, 91, 'Ahmad', 58 if mobile else 68, weight=600)
-    hero += text(pad, 161 if mobile else 173, 'Syahani.', 58 if mobile else 68, weight=600)
-    hero += text(pad, 208 if mobile else 225, 'Frontend & full-stack', 22 if mobile else 23)
-    hero += text(pad, 239 if mobile else 257, 'development.', 22 if mobile else 23)
-    hero += text(pad, 288 if mobile else 310, profile['location'], 16, MUTED)
-    hero += text(pad, 322 if mobile else 348, 'ahmadsyahani.app', 17, BLUE)
+    pad = 28 if mobile else 44
     if mobile:
-        hero += f'<g class="enter" transform="translate(60 365) scale(1)">{portrait}</g>'
+        hero = text(pad, 89, 'Ahmad', 43, weight=600)
+        hero += text(pad, 141, 'Syahani.', 43, weight=600)
+        hero += f'<g class="enter" transform="translate(236 38) scale(.52)">{portrait}</g>'
+        hero += text(pad, 243, 'Frontend & full-stack development', 19)
+        hero += text(pad, 279, profile['location'], 15, MUTED)
+        hero += text(pad, 313, 'PHP / TypeScript / Dart', 15, BLUE)
     else:
-        hero += f'<g class="enter" transform="translate(514 58) scale(.94)">{portrait}</g>'
-    card('hero'+suffix, 780 if mobile else 460, hero, width)
+        hero = text(pad, 115, 'Ahmad Syahani.', 55, weight=600)
+        hero += text(pad, 161, 'Frontend & full-stack development', 23)
+        hero += text(pad, 213, profile['location'], 17, MUTED)
+        hero += text(pad, 251, 'PHP / TypeScript / Dart', 17, BLUE)
+        hero += text(pad, 289, 'ahmadsyahani.app', 16, MUTED)
+        hero += f'<g class="enter" transform="translate(568 30) scale(.79)">{portrait}</g>'
+    card('hero'+suffix, 370 if mobile else 360, hero, width)
 
-    graph = text(pad, 65, 'Little by little.', 32 if mobile else 38, weight=600)
-    graph += text(pad, 103, 'My year on GitHub.', 18, MUTED)
+    graph = text(pad, 58, 'Little by little.', 29 if mobile else 32, weight=600)
+    graph += text(pad, 88, f'{total:,} contributions this year', 16, MUTED)
     step = (width-pad*2)/54
     cell = step*.76
-    top = 137
+    top = 117
     for i, (date, count, level) in enumerate(days):
         col, row = divmod(i+lead, 7)
         graph += f'<rect x="{pad+col*step:.2f}" y="{top+row*step:.2f}" width="{cell:.2f}" height="{cell:.2f}" rx="{cell*.2:.2f}" fill="{colors[level]}"><title>{date}: {count} contributions</title></rect>'
-    baseline = top+7*step+40
-    graph += text(pad, baseline, f'{total:,} contributions', 19, weight=600)
-    graph += text(pad if mobile else 390, baseline+32 if mobile else baseline, f'{active} active days', 18, MUTED)
-    graph += text(pad, baseline+72 if mobile else baseline+38, f'{days[0][0]} to {days[-1][0]}', 13, MUTED)
-    card('heatmap'+suffix, int(baseline+136 if mobile else baseline+104), graph, width)
+    baseline = top+7*step+28
+    graph += text(pad, baseline, f'{days[0][0]} to {days[-1][0]}', 12, MUTED)
+    card('heatmap'+suffix, int(baseline+58), graph, width)
 
-    body = text(pad, 66, 'Web. Mobile. A curious cat.', 25 if mobile else 34, weight=600)
-    body += text(pad, 110, 'PHP / TypeScript / Dart', 19, BLUE)
-    body += text(pad, 150, f"{profile['public_repos']} public repositories", 17, MUTED)
-    card('toolkit'+suffix, 228, body, width, '#e7ecdf')
+    monthly = {}
+    for date, count, _ in days:
+        monthly[date[:7]] = monthly.get(date[:7], 0)+count
+    months = list(sorted(monthly.items()))[-12:]
+    best = max(day[1] for day in days)
+    activity = text(pad, 52, 'The daily rhythm.', 25 if mobile else 28, weight=600)
+    activity += text(pad, 88, f'{active} active days', 17, BLUE, weight=600)
+    activity += text(pad, 118, f'Busiest day: {best} contributions', 15, MUTED)
+    chart_x, chart_y = (pad, 165) if mobile else (410, 38)
+    chart_w, chart_h = (width-pad*2, 66) if mobile else (width-454, 83)
+    bar_step = chart_w/12
+    maximum = max(1, max(count for _,count in months))
+    for i,(month,count) in enumerate(months):
+        bar_h = max(3, count/maximum*chart_h)
+        activity += f'<rect x="{chart_x+i*bar_step:.2f}" y="{chart_y+chart_h-bar_h:.2f}" width="{bar_step-8:.2f}" height="{bar_h:.2f}" rx="3" fill="{BLUE if count else colors[0]}"><title>{month}: {count} contributions</title></rect>'
+        activity += text(chart_x+i*bar_step, chart_y+chart_h+22, dt.date.fromisoformat(month+'-01').strftime('%b')[0:1] if mobile else dt.date.fromisoformat(month+'-01').strftime('%b'), 10, MUTED)
+    card('activity'+suffix, 303 if mobile else 188, activity, width)
 
-    heading = text(pad, 65, 'On my workbench.', 32 if mobile else 38, weight=600)
-    heading += text(pad, 103, 'A few repositories to look around.', 17, MUTED)
-    card('projects-title'+suffix, 157, heading, width)
-    for name in selected:
+    column = width/3
+    for i,(name,label,headline,description,color,foreground) in enumerate([
+        ('build','BUILD','Web','PHP / TypeScript',BLUE,'#ffffff'),
+        ('mobile','MOBILE','Apps','Dart projects','#e7ecdf',INK),
+        ('code','EXPLORE',str(profile['public_repos']),'Public repositories',PAPER,INK),
+    ]):
+        inset = 12 if mobile else 25
+        left, right = [(0,10),(5,5),(10,0)][i]
+        body = text(inset, 34 if mobile else 40, label, 11 if mobile else 12, foreground, weight=600)
+        body += text(inset, 83 if mobile else 107, headline, 30 if mobile else 48, foreground, weight=600)
+        labels = textwrap.wrap(description, 13) if mobile else [description]
+        for line_index,line in enumerate(labels):
+            body += text(inset, (117 if mobile else 146)+line_index*19, line, 12 if mobile else 16, foreground)
+        card(name+suffix, 190 if mobile else 214, body, column, color, left, right)
+
+    heading = text(0, 43, 'On my workbench.', 29 if mobile else 34, weight=600)
+    card('projects-title'+suffix, 83, heading, width, 'none')
+    for i,name in enumerate(selected):
         repo = by_name[name]
-        body = text(pad, 67, name, 29 if mobile else 34, weight=600)
+        inset = 12 if mobile else 25
+        left, right = [(0,10),(5,5),(10,0)][i]
+        body = text(inset, 35 if mobile else 41, repo['language'] or 'Repository', 14 if mobile else 13, BLUE)
+        title_lines = [{'ShipX-Delivery':'ShipX', 'Nexa':'Nexa', 'ahmadsyahani.app':'Website'}[name]] if mobile else [name]
+        for j,line in enumerate(title_lines):
+            body += text(inset, (78 if mobile else 89)+j*24, line, 20 if mobile else 23, weight=600)
         description = repo.get('description') or f"{repo['language'] or 'Code'} project by @{USER}."
-        wrapped = textwrap.wrap(description, 34 if mobile else 70)
-        for i, line in enumerate(wrapped):
-            body += text(pad, 111+i*28, line, 17 if mobile else 19, MUTED)
-        meta = 111+len(wrapped)*28+23
-        body += text(pad, meta, repo['language'] or 'Repository', 16, BLUE, weight=600)
-        body += text(pad, meta+36, f"{repo['stargazers_count']} stars / {repo['forks_count']} forks", 14, MUTED)
-        card('repo-'+name+suffix, meta+112, body, width)
+        wrapped = {'ShipX-Delivery':['POS &', 'delivery'], 'Nexa':['Dart', 'project'], 'ahmadsyahani.app':['Personal', 'website']}[name] if mobile else textwrap.wrap(description, 27)
+        desc_top = 119 if mobile else 128
+        for j, line in enumerate(wrapped):
+            body += text(inset, desc_top+j*23, line, 16 if mobile else 15, MUTED)
+        if not mobile:
+            body += text(inset, 240, f"{repo['stargazers_count']} stars", 13, MUTED)
+        card('repo-'+name+suffix, 204 if mobile else 288, body, column, PAPER, left, right)
 
 
-def picture(name, alt, link=None):
-    value = f'<picture><source media="(max-width: 600px)" srcset="./cards/{name}-mobile.svg" /><img src="./cards/{name}.svg" width="100%" alt="{html.escape(alt, quote=True)}" /></picture>'
+def picture(name, alt, link=None, width='100%', newline=True):
+    value = f'<picture><source media="(max-width: 600px)" srcset="./cards/{name}-mobile.svg" /><img src="./cards/{name}.svg" width="{width}" alt="{html.escape(alt, quote=True)}" /></picture>'
     if link:
         value = f'<a href="{link}">{value}</a>'
-    return value+'<br>\n'
+    return value+('<br>\n' if newline else '')
 
 
 readme = '<div align="center">\n'
 readme += picture('hero', 'Ahmad Syahani. Frontend and full-stack development in Surabaya. ASCII cat from my GitHub avatar.', 'https://ahmadsyahani.app')
 readme += picture('heatmap', f'Little by little. {total} GitHub contributions and {active} active days.', f'https://github.com/{USER}?tab=overview')
-readme += picture('toolkit', f'PHP, TypeScript, Dart. {profile["public_repos"]} public repositories.', f'https://github.com/{USER}?tab=repositories')
+readme += picture('activity', f'Monthly contributions. {active} active days. Busiest day: {best} contributions.')
+for name,alt,link in [('build','Web development: PHP and TypeScript',f'https://github.com/{USER}?tab=repositories'),('mobile','Mobile development: Dart',f'https://github.com/{USER}/Nexa'),('code',f'{profile["public_repos"]} public repositories',f'https://github.com/{USER}?tab=repositories')]:
+    readme += picture(name, alt, link, '33.333%', False)
+readme += '<br>\n'
 readme += picture('projects-title', 'On my workbench. Selected repositories.')
 for name in selected:
-    readme += picture('repo-'+name, name+' repository', f'https://github.com/{USER}/{name}')
+    readme += picture('repo-'+name, name+' repository', f'https://github.com/{USER}/{name}', '33.333%', False)
+readme += '\n'
 readme += '\n</div>\n\n<p align="center"><a href="https://ahmadsyahani.app">Website</a> &nbsp;/&nbsp; <a href="https://github.com/ahmadsyahani">GitHub</a></p>\n'
 (ROOT / 'README.md').write_text(readme, encoding='utf-8')
 assert len(lines) == 53 and all(len(line) == 100 for line in lines)
