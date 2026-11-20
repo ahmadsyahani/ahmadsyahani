@@ -116,10 +116,12 @@ def card(name, height, body, width=880, background=PAPER, left=0, right=0, delay
     (static / 'versions' / f'{name}-{version}.svg').write_text(still, encoding='utf-8', newline='\n')
 
 
-# Crop the monitor out while keeping the ears, eyes, and chest of the avatar cat.
+# Trim white avatar margins while preserving the entire illustrated subject.
 image = Image.open(ASSETS / 'avatar.png').convert('L')
-w, h = image.size
-image = ImageOps.autocontrast(image.crop((int(w*.10), int(h*.24), int(w*.91), int(h*.98))))
+bounds = image.point(lambda value: 255 if value < 240 else 0).getbbox()
+if bounds:
+    image = ImageOps.expand(image.crop(bounds), border=24, fill=255)
+image = ImageOps.autocontrast(image)
 cols, rows = 100, 53
 image = image.resize((cols, rows), Image.Resampling.LANCZOS)
 ramp = '@%#*+=-:. '
@@ -281,7 +283,7 @@ def picture(name, alt, link=None, width='100%', newline=True):
 
 
 readme = '<p align="right"><a href="./STATIC.md">Pause animations / Static view</a></p>\n\n<div align="center">\n'
-readme += picture('hero', 'Ahmad Syahani. Frontend and full-stack development in Surabaya. ASCII cat from my GitHub avatar.', 'https://ahmadsyahani.app')
+readme += picture('hero', 'Ahmad Syahani. Frontend and full-stack development in Surabaya. ASCII portrait from my GitHub avatar.', 'https://ahmadsyahani.app')
 readme += picture('heatmap', f'Little by little. {total} GitHub contributions and {active} active days.', f'https://github.com/{USER}?tab=overview')
 readme += picture('activity', f"Last 12 calendar months: {stats['total']} contributions. Current / longest streak: {stats['current_streak']} / {stats['longest_streak']} days. Active contribution days: {stats['active']} / {stats['days']}. Busiest day: {best} contributions. Highest month highlighted.")
 for name,alt,link in [('build','Web development: PHP and TypeScript',f'https://github.com/{USER}?tab=repositories'),('mobile','Mobile development: Dart',f'https://github.com/{USER}/Nexa'),('code',f'{profile["public_repos"]} public repositories',f'https://github.com/{USER}?tab=repositories')]:

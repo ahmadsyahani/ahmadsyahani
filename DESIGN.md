@@ -1,12 +1,12 @@
 # Catfolio
 
-Personal GitHub profile for Ahmad Syahani. Visitors can identify Ahmad, inspect public contribution activity, and open featured repositories. Preserve the GitHub cat avatar, existing project facts, and links.
+Personal GitHub profile for Ahmad Syahani. Visitors can identify Ahmad, inspect public contribution activity, and open featured repositories. Preserve the current GitHub avatar, existing project facts, and links. The avatar is now a black-and-white illustration of a person with glasses; trim white margins with padding and preserve the full hair and face.
 
 The user selected warm white, moss green, and a spacious layout. Google Sans Flex is mandatory for headings and prose; monospace is reserved for the ASCII image. Font outlines ensure reliable SVG rendering without remote font requests.
 
 The user requested another layout revision based on the original Avi Vashishta reference. The structure now follows its compact composition: horizontal introduction and ASCII portrait, full-width contribution calendar, monthly activity summary, three specialty tiles, an unboxed project heading, and three repository cards in one row.
 
-The signature remains the cat portrait, Google Sans Flex, warm white, and moss green. Desktop outer padding is 44 px; mobile outer padding is 28 px. Row gaps are 20 px, and column gutters are 15 px desktop. Gutters are baked into the SVG canvases so inline images do not touch. The mobile hero keeps a small portrait beside the name instead of stacking an oversized portrait below it. Narrow column variants rewrap real copy at a smaller type scale.
+The signature remains the ASCII portrait, Google Sans Flex, warm white, and moss green. Desktop outer padding is 44 px; mobile outer padding is 28 px. Row gaps are 20 px, and column gutters are 15 px desktop. Gutters are baked into the SVG canvases so inline images do not touch. The mobile hero keeps a small portrait beside the name instead of stacking an oversized portrait below it. Narrow column variants rewrap real copy at a smaller type scale.
 
 The daily-rhythm card follows the user's supplied chart reference: a large total above a twelve-month histogram, with a right-hand statistics column on desktop and a three-part statistics row below the chart on mobile. Show current/longest streak, active/observed contribution days, and the busiest-day count. All figures use the same last-twelve-calendar-month window displayed below the chart, so the total equals the sum of the bars. All tied positive maximum months receive a leaf-green highlight and a numeric label; a zero-only chart has no highlighted winner. Google Sans Flex and the Catfolio colors remain unchanged. Use contribution terminology rather than implying every contribution is a commit.
 
