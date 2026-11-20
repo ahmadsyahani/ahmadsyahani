@@ -42,6 +42,23 @@ calendar = (DATA / 'contributions.html').read_text(encoding='utf-8-sig')
 PAPER, INK, BLUE = '#f6f5ef', '#23392e', '#436550'
 MUTED = '#58665b'
 FONT = ROOT / 'fonts' / 'GoogleSansFlex.ttf'
+MOTION_CSS = '''
+@keyframes scan{from{opacity:.12;clip-path:inset(0 100% 0 0)}to{opacity:1;clip-path:inset(0)}}
+@keyframes cell{from{opacity:.12;transform:scale(.3)}to{opacity:1;transform:scale(1)}}
+@keyframes bar{from{opacity:.25;transform:scaleY(.025)}to{opacity:1;transform:scaleY(1)}}
+@keyframes arrive{from{opacity:.35;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ink{from{opacity:.3}to{opacity:1}}
+.ascii-row{animation:scan .28s ease-out both;transform-box:fill-box}
+.cell{transform-box:fill-box;transform-origin:center;animation:cell .45s cubic-bezier(.16,1,.3,1) both}
+.bar{transform-box:fill-box;transform-origin:center bottom;animation:bar .85s cubic-bezier(.16,1,.3,1) both}
+.card-in{animation:arrive .7s cubic-bezier(.16,1,.3,1) both}
+.ink{animation:ink .65s ease-out both}
+@media(prefers-reduced-motion:reduce){.ascii-row,.cell,.bar,.card-in,.ink{animation:none!important;opacity:1!important;transform:none!important;clip-path:none!important}}
+'''
+
+
+def motion(content, kind='ink', delay=0):
+    return f'<g class="{kind}" style="animation-delay:{delay:.3f}s">{content}</g>'
 
 
 @lru_cache(maxsize=8)
@@ -73,12 +90,13 @@ def text(x, y, value, size=16, color=INK, family=None, extra='', weight=400):
     return f'<g aria-label="{html.escape(str(value), quote=True)}" fill="{color}" transform="translate({x} {y}) scale({scale} {-scale})">{"".join(parts)}</g>'
 
 
-def card(name, height, body, width=880, background=PAPER, left=0, right=0):
+def card(name, height, body, width=880, background=PAPER, left=0, right=0, delay=None):
+    content = f'<g transform="translate({left} 0)"><rect width="{width-left-right}" height="{height-20}" rx="14" fill="{background}"/>{body}</g>'
+    if delay is not None:
+        content = motion(content, 'card-in', delay)
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img">'
            f'<title>{html.escape(name.replace("-", " "))} | Ahmad Syahani</title>'
-           '<style>@keyframes enter{from{opacity:.7}to{opacity:1}}.enter{animation:enter 1.2s ease-out both}'
-           '@media(prefers-reduced-motion:reduce){.enter{animation:none!important}}</style>'
-           f'<g transform="translate({left} 0)"><rect width="{width-left-right}" height="{height-20}" rx="14" fill="{background}"/>{body}</g></svg>')
+           f'<style>{MOTION_CSS}</style>{content}</svg>')
     ET.fromstring(svg)
     (CARDS / f'{name}.svg').write_text(svg, encoding='utf-8')
 
@@ -93,7 +111,7 @@ ramp = '@%#*+=-:. '
 pixels = list(image.get_flattened_data()) if hasattr(image, 'get_flattened_data') else list(image.getdata())
 lines = [''.join(ramp[min(9, p*10//256)] for p in pixels[r*cols:(r+1)*cols]) for r in range(rows)]
 (ASSETS / 'portrait.txt').write_text('\n'.join(lines), encoding='utf-8')
-portrait = ''.join(text(0, 6+r*6.5, line, 6.5, INK, 'monospace', 'xml:space="preserve" textLength="320" lengthAdjust="spacing"') for r, line in enumerate(lines))
+portrait = ''.join(motion(text(0, 6+r*6.5, line, 6.5, INK, 'monospace', 'xml:space="preserve" textLength="320" lengthAdjust="spacing"'), 'ascii-row', .15+r*.032) for r, line in enumerate(lines))
 card('portrait', 380, f'<g transform="translate(20 10)">{portrait}</g>', 360)
 
 tooltips = {}
@@ -131,7 +149,7 @@ for width, suffix in [(880, ''), (440, '-mobile')]:
     if mobile:
         hero = text(pad, 89, 'Ahmad', 43, weight=600)
         hero += text(pad, 141, 'Syahani.', 43, weight=600)
-        hero += f'<g class="enter" transform="translate(236 38) scale(.52)">{portrait}</g>'
+        hero += f'<g transform="translate(236 38) scale(.52)">{portrait}</g>'
         hero += text(pad, 243, 'Frontend & full-stack development', 19)
         hero += text(pad, 279, profile['location'], 15, MUTED)
         hero += text(pad, 313, 'PHP / TypeScript / Dart', 15, BLUE)
@@ -141,17 +159,17 @@ for width, suffix in [(880, ''), (440, '-mobile')]:
         hero += text(pad, 213, profile['location'], 17, MUTED)
         hero += text(pad, 251, 'PHP / TypeScript / Dart', 17, BLUE)
         hero += text(pad, 289, 'ahmadsyahani.app', 16, MUTED)
-        hero += f'<g class="enter" transform="translate(568 30) scale(.79)">{portrait}</g>'
+        hero += f'<g transform="translate(568 30) scale(.79)">{portrait}</g>'
     card('hero'+suffix, 370 if mobile else 360, hero, width)
 
     graph = text(pad, 58, 'Little by little.', 29 if mobile else 32, weight=600)
-    graph += text(pad, 88, f'{total:,} contributions this year', 16, MUTED)
+    graph += motion(text(pad, 88, f'{total:,} contributions this year', 16, MUTED), delay=.4)
     step = (width-pad*2)/54
     cell = step*.76
     top = 117
     for i, (date, count, level) in enumerate(days):
         col, row = divmod(i+lead, 7)
-        graph += f'<rect x="{pad+col*step:.2f}" y="{top+row*step:.2f}" width="{cell:.2f}" height="{cell:.2f}" rx="{cell*.2:.2f}" fill="{colors[level]}"><title>{date}: {count} contributions</title></rect>'
+        graph += f'<rect class="cell" style="animation-delay:{.25+col*.027+row*.024:.3f}s" x="{pad+col*step:.2f}" y="{top+row*step:.2f}" width="{cell:.2f}" height="{cell:.2f}" rx="{cell*.2:.2f}" fill="{colors[level]}"><title>{date}: {count} contributions</title></rect>'
     baseline = top+7*step+28
     graph += text(pad, baseline, f'{days[0][0]} to {days[-1][0]}', 12, MUTED)
     card('heatmap'+suffix, int(baseline+58), graph, width)
@@ -162,15 +180,15 @@ for width, suffix in [(880, ''), (440, '-mobile')]:
     months = list(sorted(monthly.items()))[-12:]
     best = max(day[1] for day in days)
     activity = text(pad, 52, 'The daily rhythm.', 25 if mobile else 28, weight=600)
-    activity += text(pad, 88, f'{active} active days', 17, BLUE, weight=600)
-    activity += text(pad, 118, f'Busiest day: {best} contributions', 15, MUTED)
+    activity += motion(text(pad, 88, f'{active} active days', 17, BLUE, weight=600), delay=.35)
+    activity += motion(text(pad, 118, f'Busiest day: {best} contributions', 15, MUTED), delay=.55)
     chart_x, chart_y = (pad, 165) if mobile else (410, 38)
     chart_w, chart_h = (width-pad*2, 66) if mobile else (width-454, 83)
     bar_step = chart_w/12
     maximum = max(1, max(count for _,count in months))
     for i,(month,count) in enumerate(months):
         bar_h = max(3, count/maximum*chart_h)
-        activity += f'<rect x="{chart_x+i*bar_step:.2f}" y="{chart_y+chart_h-bar_h:.2f}" width="{bar_step-8:.2f}" height="{bar_h:.2f}" rx="3" fill="{BLUE if count else colors[0]}"><title>{month}: {count} contributions</title></rect>'
+        activity += f'<rect class="bar" style="animation-delay:{.5+i*.075:.3f}s" x="{chart_x+i*bar_step:.2f}" y="{chart_y+chart_h-bar_h:.2f}" width="{bar_step-8:.2f}" height="{bar_h:.2f}" rx="3" fill="{BLUE if count else colors[0]}"><title>{month}: {count} contributions</title></rect>'
         activity += text(chart_x+i*bar_step, chart_y+chart_h+22, dt.date.fromisoformat(month+'-01').strftime('%b')[0:1] if mobile else dt.date.fromisoformat(month+'-01').strftime('%b'), 10, MUTED)
     card('activity'+suffix, 303 if mobile else 188, activity, width)
 
@@ -187,7 +205,7 @@ for width, suffix in [(880, ''), (440, '-mobile')]:
         labels = textwrap.wrap(description, 13) if mobile else [description]
         for line_index,line in enumerate(labels):
             body += text(inset, (117 if mobile else 146)+line_index*19, line, 12 if mobile else 16, foreground)
-        card(name+suffix, 190 if mobile else 214, body, column, color, left, right)
+        card(name+suffix, 190 if mobile else 214, body, column, color, left, right, delay=.25+i*.13)
 
     heading = text(0, 43, 'On my workbench.', 29 if mobile else 34, weight=600)
     card('projects-title'+suffix, 83, heading, width, 'none')
@@ -206,7 +224,7 @@ for width, suffix in [(880, ''), (440, '-mobile')]:
             body += text(inset, desc_top+j*23, line, 16 if mobile else 15, MUTED)
         if not mobile:
             body += text(inset, 240, f"{repo['stargazers_count']} stars", 13, MUTED)
-        card('repo-'+name+suffix, 204 if mobile else 288, body, column, PAPER, left, right)
+        card('repo-'+name+suffix, 204 if mobile else 288, body, column, PAPER, left, right, delay=.35+i*.13)
 
 
 def picture(name, alt, link=None, width='100%', newline=True):

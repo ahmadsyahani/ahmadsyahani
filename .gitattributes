@@ -1,0 +1,4 @@
+# Cached inputs and rendered artwork are not application source code.
+data/** linguist-generated=true
+cards/** linguist-generated=true
+assets/portrait.txt linguist-generated=true
