@@ -22,6 +22,11 @@ ASSETS = ROOT / 'assets'
 DATA = ROOT / 'data'
 for folder in (CARDS, ASSETS, DATA):
     folder.mkdir(exist_ok=True)
+for folder in (CARDS / 'versions', CARDS / 'static' / 'versions'):
+    folder.mkdir(parents=True, exist_ok=True)
+    assert folder.resolve().is_relative_to(CARDS.resolve())
+    for previous in folder.glob('*.svg'):
+        previous.unlink()
 
 
 def fetch(url):
@@ -99,11 +104,15 @@ def card(name, height, body, width=880, background=PAPER, left=0, right=0, delay
            f'<title>{html.escape(name.replace("-", " "))} | Ahmad Syahani</title>'
            f'<style>{MOTION_CSS}</style>{content}</svg>')
     ET.fromstring(svg)
-    (CARDS / f'{name}.svg').write_text(svg, encoding='utf-8')
+    (CARDS / f'{name}.svg').write_text(svg, encoding='utf-8', newline='\n')
     static = CARDS / 'static'
     static.mkdir(exist_ok=True)
     static_css = '.ascii-row,.cell,.bar,.card-in,.ink{animation:none!important;opacity:1!important;transform:none!important;clip-path:none!important}'
-    (static / f'{name}.svg').write_text(svg.replace(MOTION_CSS, static_css), encoding='utf-8')
+    still = svg.replace(MOTION_CSS, static_css)
+    (static / f'{name}.svg').write_text(still, encoding='utf-8', newline='\n')
+    version = hashlib.sha256(svg.encode('utf-8')).hexdigest()[:10]
+    (CARDS / 'versions' / f'{name}-{version}.svg').write_text(svg, encoding='utf-8', newline='\n')
+    (static / 'versions' / f'{name}-{version}.svg').write_text(still, encoding='utf-8', newline='\n')
 
 
 # Crop the monitor out while keeping the ears, eyes, and chest of the avatar cat.
@@ -235,7 +244,7 @@ for width, suffix in [(880, ''), (440, '-mobile')]:
 def picture(name, alt, link=None, width='100%', newline=True):
     desktop_version = hashlib.sha256((CARDS / f'{name}.svg').read_bytes()).hexdigest()[:10]
     mobile_version = hashlib.sha256((CARDS / f'{name}-mobile.svg').read_bytes()).hexdigest()[:10]
-    value = f'<picture><source media="(max-width: 600px)" srcset="./cards/{name}-mobile.svg?v={mobile_version}" /><img src="./cards/{name}.svg?v={desktop_version}" width="{width}" alt="{html.escape(alt, quote=True)}" /></picture>'
+    value = f'<picture><source media="(max-width: 600px)" srcset="./cards/versions/{name}-mobile-{mobile_version}.svg" /><img src="./cards/versions/{name}-{desktop_version}.svg" width="{width}" alt="{html.escape(alt, quote=True)}" /></picture>'
     if link:
         value = f'<a href="{link}">{value}</a>'
     return value+('<br>\n' if newline else '')
