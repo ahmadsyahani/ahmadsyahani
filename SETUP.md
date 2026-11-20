@@ -21,4 +21,6 @@ Headings and body text use the official Google Sans Flex font, converted into ve
 
 The generator is Python. HTML in README.md only arranges the resulting SVG images. The cached GitHub contribution page is HTML and is larger than the Python source; .gitattributes marks cached inputs and generated artwork so GitHub Linguist can exclude them from source language statistics. GitHub recalculates those statistics asynchronously.
 
+The daily-rhythm card reports the last twelve calendar months, including the current partial month. Its total equals the chart's monthly sums; the exact start/end dates are printed below. The heatmap may cover extra days from GitHub's calendar grid, so its total can differ. Streaks count consecutive days with any contribution, allow an unfinished empty today, and are bounded to the displayed period. Tied maximum months are all highlighted; no month wins when all counts are zero. Tests run with `python -m unittest discover -s scripts -p 'test_*.py'` and in the refresh workflow.
+
 The font is bundled under the SIL Open Font License in fonts/OFL.txt. Source: https://github.com/google/fonts/tree/main/ofl/googlesansflex. No personal statistics or visual assets from Avi's profile are included.

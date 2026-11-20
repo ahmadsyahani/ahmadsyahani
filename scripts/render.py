@@ -14,6 +14,7 @@ from fontTools.varLib.instancer import instantiateVariableFont
 from fontTools.pens.svgPathPen import SVGPathPen
 
 from PIL import Image, ImageOps
+from profile_stats import summarize_activity
 
 ROOT = Path(__file__).resolve().parents[1]
 USER = 'ahmadsyahani'
@@ -157,6 +158,9 @@ lead = (dt.date.fromisoformat(days[0][0]).weekday()+1)%7
 by_name = {r['name']: r for r in repos}
 selected = ['ShipX-Delivery', 'Nexa', 'ahmadsyahani.app']
 colors = ['#dce2d6', '#bdcfb4', '#8eac87', '#64815e', '#3f614b']
+stats = summarize_activity(days, dt.datetime.now(dt.timezone.utc).date())
+months = stats['months']
+best = stats['best_day']
 for width, suffix in [(880, ''), (440, '-mobile')]:
     mobile = bool(suffix)
     pad = 28 if mobile else 44
@@ -188,23 +192,49 @@ for width, suffix in [(880, ''), (440, '-mobile')]:
     graph += text(pad, baseline, f'{days[0][0]} to {days[-1][0]}', 12, MUTED)
     card('heatmap'+suffix, int(baseline+58), graph, width)
 
-    monthly = {}
-    for date, count, _ in days:
-        monthly[date[:7]] = monthly.get(date[:7], 0)+count
-    months = list(sorted(monthly.items()))[-12:]
-    best = max(day[1] for day in days)
-    activity = text(pad, 52, 'The daily rhythm.', 25 if mobile else 28, weight=600)
-    activity += motion(text(pad, 88, f'{active} active days', 17, BLUE, weight=600), delay=.35)
-    activity += motion(text(pad, 118, f'Busiest day: {best} contributions', 15, MUTED), delay=.55)
-    chart_x, chart_y = (pad, 165) if mobile else (410, 38)
-    chart_w, chart_h = (width-pad*2, 66) if mobile else (width-454, 83)
+    activity = text(pad, 51, 'The daily rhythm.', 22, weight=600)
+    activity += text(pad, 100, f"{stats['total']:,} contributions", 32 if mobile else 40, weight=600)
+    activity += text(pad, 128, 'Last 12 calendar months', 13, MUTED)
+    chart_x, chart_y = pad, 162
+    chart_w, chart_h = (width-pad*2, 122) if mobile else (548, 124)
     bar_step = chart_w/12
-    maximum = max(1, max(count for _,count in months))
+    maximum = max(1, stats['peak_month'])
     for i,(month,count) in enumerate(months):
         bar_h = max(3, count/maximum*chart_h)
-        activity += f'<rect class="bar" style="animation-delay:{.5+i*.075:.3f}s" x="{chart_x+i*bar_step:.2f}" y="{chart_y+chart_h-bar_h:.2f}" width="{bar_step-8:.2f}" height="{bar_h:.2f}" rx="3" fill="{BLUE if count else colors[0]}"><title>{month}: {count} contributions</title></rect>'
-        activity += text(chart_x+i*bar_step, chart_y+chart_h+22, dt.date.fromisoformat(month+'-01').strftime('%b')[0:1] if mobile else dt.date.fromisoformat(month+'-01').strftime('%b'), 10, MUTED)
-    card('activity'+suffix, 303 if mobile else 188, activity, width)
+        peak = count > 0 and count == stats['peak_month']
+        fill = '#66823e' if peak else '#75866c' if i == 11 else INK
+        x = chart_x+i*bar_step
+        y = chart_y+chart_h-bar_h
+        activity += f'<rect class="bar" data-month="{month}" data-count="{count}" data-peak="{str(peak).lower()}" style="animation-delay:{.5+i*.075:.3f}s" x="{x:.2f}" y="{y:.2f}" width="{bar_step-8:.2f}" height="{bar_h:.2f}" rx="3" fill="{fill}"><title>{month}: {count} contributions{" (highest month)" if peak else ""}</title></rect>'
+        activity += text(x, chart_y+chart_h+22, dt.date.fromisoformat(month+'-01').strftime('%b'), 10 if mobile else 12, BLUE if peak else MUTED, weight=600 if peak else 400)
+        if peak:
+            label = f'{count:,}'
+            label_width = sum(glyph_path(600, char)[1] for char in label)*13/font_instance(600)['head'].unitsPerEm
+            activity += text(x+(bar_step-8-label_width)/2, y-10, label, 13, BLUE, weight=600)
+    activity += text(pad, 330, f"{stats['start']} to {stats['end']}", 11, MUTED)
+    if mobile:
+        metrics = [(f"{stats['current_streak']} / {stats['longest_streak']}", 'current / longest', 'streak days'),
+                   (f"{stats['active']} / {stats['days']}", 'active / total', 'contribution days'),
+                   (str(best), 'contributions on', 'the busiest day')]
+        activity += f'<path d="M{pad} 349H{width-pad}" stroke="{colors[0]}"/>'
+        for i,(value,label,unit) in enumerate(metrics):
+            x = pad+i*(width-pad*2)/3
+            activity += text(x, 390, value, 25, weight=600)
+            activity += text(x, 416, label, 12, MUTED)
+            activity += text(x, 435, unit, 12, MUTED)
+    else:
+        metrics = [(f"{stats['current_streak']} / {stats['longest_streak']}", 'current / longest streak', 'days'),
+                   (f"{stats['active']} / {stats['days']}", 'active contribution days', ''),
+                   (str(best), 'on the busiest day', 'contributions')]
+        for i,(value,label,unit) in enumerate(metrics):
+            y = 83+i*96
+            activity += text(662, y, value, 32, weight=600)
+            activity += text(662, y+26, label, 13, MUTED)
+            if unit:
+                activity += text(662, y+44, unit, 11, MUTED)
+            if i < 2:
+                activity += '<path d="M662 '+str(y+56)+'H836" stroke="'+colors[0]+'"/>'
+    card('activity'+suffix, 489 if mobile else 383, activity, width)
 
     column = width/3
     for i,(name,label,headline,description,color,foreground) in enumerate([
@@ -253,7 +283,7 @@ def picture(name, alt, link=None, width='100%', newline=True):
 readme = '<p align="right"><a href="./STATIC.md">Pause animations / Static view</a></p>\n\n<div align="center">\n'
 readme += picture('hero', 'Ahmad Syahani. Frontend and full-stack development in Surabaya. ASCII cat from my GitHub avatar.', 'https://ahmadsyahani.app')
 readme += picture('heatmap', f'Little by little. {total} GitHub contributions and {active} active days.', f'https://github.com/{USER}?tab=overview')
-readme += picture('activity', f'Monthly contributions. {active} active days. Busiest day: {best} contributions.')
+readme += picture('activity', f"Last 12 calendar months: {stats['total']} contributions. Current / longest streak: {stats['current_streak']} / {stats['longest_streak']} days. Active contribution days: {stats['active']} / {stats['days']}. Busiest day: {best} contributions. Highest month highlighted.")
 for name,alt,link in [('build','Web development: PHP and TypeScript',f'https://github.com/{USER}?tab=repositories'),('mobile','Mobile development: Dart',f'https://github.com/{USER}/Nexa'),('code',f'{profile["public_repos"]} public repositories',f'https://github.com/{USER}?tab=repositories')]:
     readme += picture(name, alt, link, '33.333%', False)
 readme += '<br>\n'
